@@ -1,0 +1,18 @@
+# Infos
+# To run the server from celery we should:
+
+1- Start the server that you are using (redis-server or RabbitMQ),
+using this command: celery -A tasks worker --loglevel=info (for redis)
+2- start another terminal and write:
+      python
+   >>>from tasks import add (this is my function in tasks.py)
+   >>>add.delay(5,6)
+
+You can see the results in the terminal
+
+
+""
+If you are facing with this problem
+AttributeError: 'DisabledBackend' object has no attribute '_get_task_meta_for'
+that's mean you did not specify a backend
+""
