@@ -8,7 +8,10 @@ from celery_settings import app
 #              )
 
 
-@app.task
+"""
+This name task is should be unique
+"""
+@app.task(name='this-is-just-func')
 def add(x, y):
     sleep(5)
     return x + y
@@ -22,3 +25,11 @@ def mu(x, y):
 @app.task
 def sub(x, y):
     return x - y
+
+
+@app.task(bind=True)
+def dump_context(self, x, y):
+    print('Executing task id {0.id}, '
+          'args: {0.args!r} '
+          'kwargs: {0.kwargs!r}'.format(
+            self.request))
